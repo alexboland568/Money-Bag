@@ -21,8 +21,6 @@ app.use(bodyParser.json());
 console.log("Listening on port 3001");
 app.listen(3001);
 
-const router = express.Router();
-
 app.post("/emailValidation", (req, res) => {
 
     client.connect(err=> {

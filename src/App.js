@@ -9,10 +9,10 @@ import { AwayEarningModal } from './components/AwayEarningModal';
 import { GuideModal } from './components/GuideModal';
 import { objectToList } from './utils/game';
 
+import {Auth} from "./components/Auth"
+
 import './App.css';
 
-import Auth from "./Auth"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 
 
