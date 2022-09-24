@@ -11,6 +11,10 @@ import { objectToList } from './utils/game';
 
 import './App.css';
 
+import Auth from "./Auth"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+
 
 
 
@@ -42,6 +46,7 @@ function App() {
           <Routes>
             <Route path = "/login" element = {<Login />}/>
             <Route path = "/signup" element = {<Signup />} />
+	    <Route path = "/auth" element = {<Auth />} />
             <Route path = "/play" element = {<div>
         <div className="side-bar">
           <img src={process.env.PUBLIC_URL + '/images/capitalist.png'} alt="Capitalist"/>
