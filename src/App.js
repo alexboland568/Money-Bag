@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Login} from "./components/Login";
+import {Signup} from "./components/Signup"
 import { Business } from './components/Business';
 import { Managers } from './components/Managers';
 import { AwayEarningModal } from './components/AwayEarningModal';
@@ -8,7 +11,11 @@ import { objectToList } from './utils/game';
 
 import './App.css';
 
+
+
+
 function App() {
+
   const balance = useSelector(state => state.balance);
   const businesses = useSelector(state => state.businesses);
   const awayEarning = useSelector(state => state.awayEarning);
@@ -30,11 +37,17 @@ function App() {
   return (
     <>
       <div className="App">
+
+        <Router>
+          <Routes>
+            <Route path = "/login" element = {<Login />}/>
+            <Route path = "/signup" element = {<Signup />} />
+            <Route path = "/play" element = {<div>
         <div className="side-bar">
           <img src={process.env.PUBLIC_URL + '/images/capitalist.png'} alt="Capitalist"/>
           <Managers/>
         </div>
-        <div className="main">
+         <div className="main">
           <div className="balance">
             <span>${balance.amount.toLocaleString()}</span>
           </div>
@@ -44,13 +57,20 @@ function App() {
             )}
           </div>
         </div>
+        </div>} />
+          </Routes>
+        </Router>
+       
+       
       </div>
-      {awayEarningShow &&
+
+      {/* {awayEarningShow &&
         <AwayEarningModal onClose={() => setAwayEarningShow(false)}/>
       }
       {guideModalShow &&
         <GuideModal onClose={() => setGuideModalShow(false)}/>
-      }
+      } */}
+
     </>
   );
 }
