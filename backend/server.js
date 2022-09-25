@@ -1,25 +1,55 @@
 const express = require("express");
 const app = express();
 var cors = require("cors");
+const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const mongo = require("mongodb").MongoClient;
+var User = require("./models/user");
+//const { collection } = require("./models/user");
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const saltRounds = 10;
+
+
 const uri = "mongodb+srv://skepticalpython:Katnips6571@moneybag.a9kcosz.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-client.connect(err => {
-  
-  
-    console.log("Connected to database");
+const secret = "donttellmysecretshhhh";
 
-  
-});
+mongo.connect(uri, function(err) {
+
+    if (err) throw err; 
+    console.log("Connected to database!");
+
+})
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 console.log("Listening on port 3001");
 app.listen(3001);
+
+const validatePassword = async(password, hashedPass) => {
+
+    return await bcrypt.compare(password, hashedPass); 
+
+}
+
+const hashPassword = async (password, saltRounds = 10) => {
+
+    try {
+
+        const salt = await bcrypt.genSalt(saltRounds);
+
+        return await bcrypt.hash(password, salt);
+
+    } catch(err) {
+        console.log(err);
+    }
+
+    return null;
+
+}
 
 app.post("/emailValidation", (req, res) => {
 
@@ -55,41 +85,85 @@ app.post("/emailValidation", (req, res) => {
 
 })
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
 
-    client.connect(err=> {
+    const email = req.body["email"];
+    const password = req.body["password"];
 
-        const collection = client.db("moneybag").collection("users");
+    const hashedPass = await hashPassword(password);
+    
+    mongo.connect(uri, function(err, db) {
 
-        collection.insertOne(req.body, function(err, res2) {
+        var dbo = db.db("moneybag");
+        dbo.collection("users").find({}, {projection: {email: 1}}).toArray(function(err, result) {
 
-            console.log("Inserted documents");
-            res.send("Signed up!");
+            if (err) throw err;
+
+            var success = true;
+            
+            for (var i = 0;i < result.length;i++) {
+
+                if (result[i]["email"] == email) {
+
+                    // Email exists 
+                    success = false;
+                    res.send({success: false});
+                    break; 
+
+                }
+
+            }
+
+            if (success) {
+
+                // Email doesn't exist 
+                res.send({success: true});
+
+                dbo.collection("users").insertOne({email: email, password: hashedPass},  function(err, res2) {
+
+                    if (err) throw err; 
+
+                    console.log("INSERTED DOCUMENT");
+
+                })
+
+            }
 
         })
+        // collection.insertOne(req.body, function(err, res2) {
+
+        //     console.log("Inserted documents");
+        //     res.send("Signed up!");
+
+        // })
 
     })
 
-    console.log(req.body);
 
 })
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
 
-    client.connect(err => {
+    const email = req.body["email"];
+    const password = req.body["password"];
 
-        const collection = client.db("moneybag").collection("users");
+    const hashedPass = await hashPassword(password);
+    console.log(hashedPass);
+    
+    mongo.connect(uri, function(err, db) {
 
-        var success = false;
+        var dbo = db.db("moneybag");
+        dbo.collection("users").find({}, {projection: {email: 1, password: 1}}).toArray(async function(err, result) {
+            
+            var success = false;
 
-        collection.find({}, {projection: {"email": 1, "password": 1}}).toArray(function(err, res2) {
+            for (var i = 0;i < result.length;i++) {
 
-            if (err) throw err; 
+                var comparison = await validatePassword(password, result[i]["password"])
 
-            for (var i = 0;i < res2.length;i++) {
+                if (email == result[i]["email"] && comparison) {
 
-                if (res2[i]["email"] == req.body["email"] && res2[i]["password"] == req.body["password"]) {
-
+                    console.log("LOGIN SUCCESSFUL!");
                     success = true; 
                     res.send({success: true});
                     break; 
@@ -99,16 +173,52 @@ app.post("/login", (req, res) => {
             }
 
             if (!success) {
+
+                console.log("LOGIN FAILED");
+                success = false;
                 res.send({success: false});
-    
+                
+
             }
 
         })
 
-        
-
     })
 
-})
+    
 
-client.close();
+    // client.connect(err => {
+
+        //  collection = client.db("moneybag").collection("users");
+        // collection.find()
+
+    //     var success = false;
+
+    //     collection.find({}, {projection: {"email": 1, "password": 1}}).toArray(function(err, res2) {
+
+    //         if (err) throw err; 
+
+    //         for (var i = 0;i < res2.length;i++) {
+
+    //             if (res2[i]["email"] == req.body["email"] && res2[i]["password"] == req.body["password"]) {
+
+    //                 success = true; 
+    //                 res.send({success: true});
+    //                 break; 
+
+    //             }
+
+    //         }
+
+    //         if (!success) {
+    //             res.send({success: false});
+    
+    //         }
+
+    //     })
+
+        
+
+    // })
+
+})
