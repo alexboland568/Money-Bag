@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CountDown } from '../CountDown';
 import { Progress } from '../Progress';
 import { v4 as uuidv4 } from 'uuid';
-import { increaseBalance, decreaseBalance, buyBusiness, setLastRun } from '../../redux/actions';
+import { setInvestmentAmount, increaseBalance, decreaseBalance, buyBusiness, setLastRun } from '../../redux/actions';
 import './Business.css';
 
 export function Business({id, name, price, lastRun, timeTaken, hasManager, quantityPurchased, icon, profit}) {
@@ -62,6 +62,7 @@ export function Business({id, name, price, lastRun, timeTaken, hasManager, quant
       {!!quantityPurchased &&
         <>
         <div className="business-icon" onClick={runBusinessManually}>
+          
           <img src={process.env.PUBLIC_URL + '/images/' + icon} alt="icon" width="60"/>
           <div className="business-quantity">{quantityPurchased}</div>
         </div>

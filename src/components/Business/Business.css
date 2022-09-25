@@ -9,6 +9,13 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
+.business-icon img {
+
+  width: 200px;
+  height: auto;
+
+}
 .business-content {
   flex-grow: 1;
 }

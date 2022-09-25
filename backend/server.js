@@ -3,18 +3,9 @@ const app = express();
 var cors = require("cors");
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const mongo = require("mongodb").MongoClient;
-var User = require("./models/user");
-//const { collection } = require("./models/user");
-
-const saltRounds = 10;
-
 
 const uri = "mongodb+srv://skepticalpython:Katnips6571@moneybag.a9kcosz.mongodb.net/?retryWrites=true&w=majority";
-
-const secret = "donttellmysecretshhhh";
-
 mongo.connect(uri, function(err) {
 
     if (err) throw err; 

@@ -6,28 +6,41 @@ body {
   color: #dedede;
   font-weight: bold;
   height: 100vh;
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
 }
 .App {
   max-width: 1200px;
   margin: auto;
-  background-color: #272727;
+  background-color: #00134D;
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.7);
   display: flex;
-  height: 100vh;
+  height: 100%;
+
 }
 
 .main {
   flex-grow: 1;
   padding: 20px;
+  width: 100%;
 }
 .side-bar {
-  background-color: #444444;
+  background-color: #5C80F0;
   padding: 10px;
+
+
 }
 .side-bar img {
   height: auto;
-  width: 150px;
+  width: 250px;
+  display: inline-block;
+
+}
+#chatID {
+
+  position: relative;
+  width: 300px;
+  margin-left: -10%;
+
 }
 .businesses {
   display: flex;
@@ -65,6 +78,34 @@ body {
 }
 .modal .modal-close img {
   width: 50px;
+}
+
+.modal input {
+
+  padding: 8px;
+  width: 50%;
+  background-color: #272727;
+  color: white;
+
+}
+
+.modal button {
+
+  text-align: center;
+  padding: 8px;
+  display: block;
+  margin: auto;
+  width: 30%;
+  background-color: #272727;
+  border-color: white;
+  color: white;
+
+}
+
+.modal button:hover {
+
+  cursor: pointer;
+
 }
 .modal h2 {
   font-size: 42px;

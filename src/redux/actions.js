@@ -1,4 +1,13 @@
-import { INCREASE_BALANCE, DECREASSE_BALANCE, BUY_BUSINESS, SET_LAST_RUN, HIRE_MANAGER } from './actionTypes';
+import { INVEST_AMOUNT, INCREASE_BALANCE, DECREASE_BALANCE, BUY_BUSINESS, SET_LAST_RUN, HIRE_MANAGER } from './actionTypes';
+
+export const setInvestmentAmount = amount =>({
+
+  type: INVEST_AMOUNT,
+  payload: {
+    amount
+  }
+
+});
 
 export const increaseBalance = amount => ({
   type: INCREASE_BALANCE,
@@ -8,7 +17,7 @@ export const increaseBalance = amount => ({
 });
 
 export const decreaseBalance = amount => ({
-  type: DECREASSE_BALANCE,
+  type: DECREASE_BALANCE,
   payload: {
     amount
   }

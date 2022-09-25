@@ -3,8 +3,8 @@ const managers = {
     id: 'alex',
     order: 1,
     name: 'Alex',
-    businessId: 'lemonade_stand',
-    description: 'Run Lemonade Stands',
+    businessId: 'piggy_bank',
+    description: 'Run Piggy Banks',
     price: 20,
     hired: false
   },
@@ -12,8 +12,8 @@ const managers = {
     id: 'catherine',
     order: 2,
     name: 'Catherine',
-    businessId: 'newspaper_delivery',
-    description: 'Run Newspaper Deliveries',
+    businessId: 'atm',
+    description: 'Run ATMS',
     price: 60,
     hired: false
   },
@@ -21,8 +21,8 @@ const managers = {
     id: 'terry',
     order: 3,
     name: 'Terry',
-    businessId: 'car_wash',
-    description: 'Run Car Washes',
+    businessId: 'money_printer',
+    description: 'Run Money Printers',
     price: 1500,
     hired: false
   },
@@ -30,8 +30,8 @@ const managers = {
     id: 'peter',
     order: 4,
     name: 'Peter',
-    businessId: 'pizza_delivery',
-    description: 'Run Pizza Deliveries',
+    businessId: 'golf_course',
+    description: 'Run Golf Courses',
     price: 6000,
     hired: false
   },
@@ -39,56 +39,20 @@ const managers = {
     id: 'simon',
     order: 5,
     name: 'Simon',
-    businessId: 'donut_shop',
-    description: 'Run Donut Shops',
+    businessId: 'bank',
+    description: 'Run Banks',
     price: 100000,
     hired: false
   },
-  trump: {
-    id: 'trump',
+  biden: {
+    id: 'biden',
     order: 6,
-    name: 'Trump',
-    businessId: 'shrimp_boat',
-    description: 'Run Shrimp Boats',
+    name: 'Biden',
+    businessId: 'global_company',
+    description: 'Run Global Companys',
     price: 1000000,
-    hired: false
-  },
-  stefani: {
-    id: 'stefani',
-    order: 7,
-    name: 'Stefani',
-    businessId: 'hockey_team',
-    description: 'Run Hockey Teams',
-    price: 8000000,
-    hired: false
-  },
-  louis: {
-    id: 'louis',
-    order: 8,
-    name: 'Louis',
-    businessId: 'movie_studio',
-    description: 'Run Movie Studios',
-    price: 200000000,
-    hired: false
-  },
-  jessica: {
-    id: 'jessica',
-    order: 9,
-    name: 'Jessica',
-    businessId: 'bank',
-    description: 'Run Banks',
-    price: 8000000000,
-    hired: false
-  },
-  tony: {
-    id: 'tony',
-    order: 10,
-    name: 'Tony',
-    businessId: 'oil_company',
-    description: 'Run Oil Companies',
-    price: 353434564431,
-    hired: false
-  },
+    hired: false,
+  }
 };
 
 export default managers;

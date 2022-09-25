@@ -1,5 +1,5 @@
 {
-  "homepage": "https://than1089.github.io/adventure-capitalist/",
+  "homepage": "http://localhost/moneybag",
   "name": "adventure-capitalist",
   "version": "0.1.0",
   "private": true,
@@ -8,11 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.1",
-    "concurrently": "^7.4.0",
     "mongodb": "^4.10.0",
-    "mongojs": "^3.1.0",
-    "mysql": "^2.18.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
